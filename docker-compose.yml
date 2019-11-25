@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  menu-cache-redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis/data:/data redis
+
+  menu-db:
+    image: postgres
+    restart: always
+    user: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: cobiro
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/pgdata:/var/lib/postgresql/data postgres
